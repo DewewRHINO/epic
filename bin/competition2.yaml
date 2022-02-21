@@ -1,0 +1,908 @@
+---
+teams:
+- name: admin
+  color: White
+  users:
+  - username: admin
+    password: ilikeguys
+- name: RedTeam
+  color: Red
+  users:
+  - username: redteam
+    password: dylanlovestroy
+- name: Team01
+  color: Blue
+  users:
+  - username: team01
+    password: 19PeacefulProfessorsJoking
+  services:
+  - name: connect-ssh
+    check_name: SSHCheck
+    host: "172.16.1.21"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: dir
+  - name: connect-smb
+    check_name: SMBCheck
+    host: "172.16.1.21"
+    port: 445
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: remote_name
+        value: 172.16.1.21
+      - name: share
+        value: scoringengine
+      - name: file
+        value: scoringengine.txt
+      # SHA256 hash of file
+      - name: hash
+        value: 61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4
+  - name: directory-dns
+    check_name: DNSCheck
+    host: "172.16.1.5"
+    port: 53
+    points: 20
+    environments:
+    - matching_content: 'status: NOERROR'
+      properties:
+      - name: qtype
+        value: A
+      - name: domain
+        value: dailydoople.bugle
+  - name: news-http
+    check_name: HTTPCheck
+    host: "172.16.1.35"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.35
+      - name: uri
+        value: "/"
+  - name: blog-http
+    check_name: HTTPCheck
+    host: "172.16.1.26"
+    port: 8080
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.26
+      - name: uri
+        value: "/wp/?p=13"
+  - name: store-http
+    check_name: HTTPCheck
+    host: "172.16.1.23"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school. Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular success.
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.23
+      - name: uri
+        value: "/"
+  - name: mail-smtp
+    check_name: SMTPCheck
+    host: "172.16.1.24"
+    port: 25
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: Successfully sent email
+      properties:
+      - name: touser
+        value: jaymerjacob@gmail.com
+      - name: subject
+        value: I love band.
+      - name: body
+        value: I don't actually like band.
+  - name: mail-http
+    check_name: HTTPCheck
+    host: "172.16.1.24"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: rainloop
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.24
+      - name: uri
+        value: "/"
+  - name: database-ssh
+    check_name: SSHCheck
+    host: "172.16.1.25"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: ls
+  - name: inject2-1
+    check_name: HTTPSCheck
+    host: "172.16.1.35"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.35
+      - name: uri
+        value: "/"
+  - name: inject2-2
+    check_name: HTTPSCheck
+    host: "172.16.1.26"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.26
+      - name: uri
+        value: "/"
+  - name: inject2-3
+    check_name: HTTPSCheck
+    host: "172.16.1.23"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular 
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.1.23
+      - name: uri
+        value: "/"
+- name: Team02
+  color: Blue
+  users:
+  - username: team02
+    password: AcceptableIdiotSwimming90
+  services:
+  - name: connect-ssh
+    check_name: SSHCheck
+    host: "172.16.2.21"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: dir
+  - name: connect-smb
+    check_name: SMBCheck
+    host: "172.16.2.21"
+    port: 445
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: remote_name
+        value: 172.16.2.21
+      - name: share
+        value: scoringengine
+      - name: file
+        value: scoringengine.txt
+      # SHA256 hash of file
+      - name: hash
+        value: 61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4
+  - name: directory-dns
+    check_name: DNSCheck
+    host: "172.16.2.5"
+    port: 53
+    points: 20
+    environments:
+    - matching_content: 'status: NOERROR'
+      properties:
+      - name: qtype
+        value: A
+      - name: domain
+        value: dailydoople.bugle
+  - name: news-http
+    check_name: HTTPCheck
+    host: "172.16.2.35"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.100.35
+      - name: uri
+        value: "/"
+  - name: blog-http
+    check_name: HTTPCheck
+    host: "172.16.2.26"
+    port: 8080
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.2.26
+      - name: uri
+        value: "/wp/?p=13"
+  - name: store-http
+    check_name: HTTPCheck
+    host: "172.16.2.23"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school. Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular success.
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: store.dailydoople.bugle
+      - name: uri
+        value: "/"
+  - name: mail-smtp
+    check_name: SMTPCheck
+    host: "172.16.2.24"
+    port: 25
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: Successfully sent email
+      properties:
+      - name: touser
+        value: jaymerjacob@gmail.com
+      - name: subject
+        value: I love band.
+      - name: body
+        value: I don't actually like band.
+  - name: mail-http
+    check_name: HTTPCheck
+    host: "172.16.2.24"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: rainloop
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.2.24
+      - name: uri
+        value: "/"
+  - name: database-ssh
+    check_name: SSHCheck
+    host: "172.16.2.25"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: ls
+  - name: inject2-1
+    check_name: HTTPSCheck
+    host: "172.16.2.35"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.2.35
+      - name: uri
+        value: "/"
+  - name: inject2-2
+    check_name: HTTPSCheck
+    host: "172.16.2.26"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.2.26
+      - name: uri
+        value: "/"
+  - name: inject2-3
+    check_name: HTTPSCheck
+    host: "172.16.2.23"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular 
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.2.23
+      - name: uri
+        value: "/"
+- name: Team03
+  color: Blue
+  users:
+  - username: team03
+    password: EveryKnifeWatches58
+  services:
+  - name: connect-ssh
+    check_name: SSHCheck
+    host: "172.16.3.21"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: dir
+  - name: connect-smb
+    check_name: SMBCheck
+    host: "172.16.3.21"
+    port: 445
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: remote_name
+        value: 172.16.3.21
+      - name: share
+        value: scoringengine
+      - name: file
+        value: scoringengine.txt
+      # SHA256 hash of file
+      - name: hash
+        value: 61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4
+  - name: directory-dns
+    check_name: DNSCheck
+    host: "172.16.3.5"
+    port: 53
+    points: 20
+    environments:
+    - matching_content: 'status: NOERROR'
+      properties:
+      - name: qtype
+        value: A
+      - name: domain
+        value: dailydoople.bugle
+  - name: news-http
+    check_name: HTTPCheck
+    host: "172.16.3.35"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.35
+      - name: uri
+        value: "/"
+  - name: blog-http
+    check_name: HTTPCheck
+    host: "172.16.3.26"
+    port: 8080
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.26
+      - name: uri
+        value: "/wp/?p=13p"
+  - name: store-http
+    check_name: HTTPCheck
+    host: "172.16.3.23"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school. Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular success.
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: store.dailydoople.bugle
+      - name: uri
+        value: "/"
+  - name: mail-smtp
+    check_name: SMTPCheck
+    host: "172.16.3.24"
+    port: 25
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: Successfully sent email
+      properties:
+      - name: touser
+        value: jaymerjacob@gmail.com
+      - name: subject
+        value: I love band.
+      - name: body
+        value: I don't actually like band.
+  - name: mail-http
+    check_name: HTTPCheck
+    host: "172.16.3.24"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: rainloop
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.24
+      - name: uri
+        value: "/"
+  - name: database-ssh
+    check_name: SSHCheck
+    host: "172.16.3.25"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: ls
+  - name: inject2-1
+    check_name: HTTPSCheck
+    host: "172.16.3.35"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.35
+      - name: uri
+        value: "/"
+  - name: inject2-2
+    check_name: HTTPSCheck
+    host: "172.16.3.26"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.26
+      - name: uri
+        value: "/"
+  - name: inject2-3
+    check_name: HTTPSCheck
+    host: "172.16.3.23"
+    port: 443
+    points: 00
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular 
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.3.23
+      - name: uri
+        value: "/"
+- name: Team04
+  color: Blue
+  users:
+  - username: team04
+    password: 18SmoothPessimistsLaughing
+  services:
+  - name: connect-ssh
+    check_name: SSHCheck
+    host: "172.16.4.21"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: dir
+  - name: connect-smb
+    check_name: SMBCheck
+    host: "172.16.4.21"
+    port: 445
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: remote_name
+        value: 172.16.4.21
+      - name: share
+        value: scoringengine
+      - name: file
+        value: scoringengine.txt
+      # SHA256 hash of file
+      - name: hash
+        value: 61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4
+  - name: directory-dns
+    check_name: DNSCheck
+    host: "172.16.4.5"
+    port: 53
+    points: 20
+    environments:
+    - matching_content: 'status: NOERROR'
+      properties:
+      - name: qtype
+        value: A
+      - name: domain
+        value: dailydoople.bugle
+  - name: news-http
+    check_name: HTTPCheck
+    host: "172.16.4.35"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.35
+      - name: uri
+        value: "/"
+  - name: blog-http
+    check_name: HTTPCheck
+    host: "172.16.4.26"
+    port: 8080
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.26
+      - name: uri
+        value: "/wp/?p=13"
+  - name: store-http
+    check_name: HTTPCheck
+    host: "172.16.4.23"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school. Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular success.
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: store.dailydoople.bugle
+      - name: uri
+        value: "/"
+  - name: mail-smtp
+    check_name: SMTPCheck
+    host: "172.16.4.24"
+    port: 25
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: Successfully sent email
+      properties:
+      - name: touser
+        value: jaymerjacob@gmail.com
+      - name: subject
+        value: I love band.
+      - name: body
+        value: I don't actually like band.
+  - name: mail-http
+    check_name: HTTPCheck
+    host: "172.16.4.24"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: rainloop
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.100.24
+      - name: uri
+        value: "/"
+  - name: database-ssh
+    check_name: SSHCheck
+    host: "172.16.4.25"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: ls
+  - name: inject2-1
+    check_name: HTTPSCheck
+    host: "172.16.4.35"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.35
+      - name: uri
+        value: "/"
+  - name: inject2-2
+    check_name: HTTPSCheck
+    host: "172.16.4.26"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.26
+      - name: uri
+        value: "/"
+  - name: inject2-3
+    check_name: HTTPSCheck
+    host: "172.16.4.23"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular 
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.23
+      - name: uri
+        value: "/"
+- name: Team05
+  color: Blue
+  users:
+  - username: team05
+    password: 39SatisfiedPresentsMelting
+  services:
+  - name: connect-ssh
+    check_name: SSHCheck
+    host: "172.16.5.21"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: dir
+  - name: connect-smb
+    check_name: SMBCheck
+    host: "172.16.5.21"
+    port: 445
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: remote_name
+        value: 172.16.5.21
+      - name: share
+        value: scoringengine
+      - name: file
+        value: scoringengine.txt
+      # SHA256 hash of file
+      - name: hash
+        value: 61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4
+  - name: directory-dns
+    check_name: DNSCheck
+    host: "172.16.5.5"
+    port: 53
+    points: 20
+    environments:
+    - matching_content: 'status: NOERROR'
+      properties:
+      - name: qtype
+        value: A
+      - name: domain
+        value: dailydoople.bugle
+  - name: news-http
+    check_name: HTTPCheck
+    host: "172.16.5.35"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.100.35
+      - name: uri
+        value: "/"
+  - name: blog-http
+    check_name: HTTPCheck
+    host: "172.16.5.26"
+    port: 8080
+    points: 20
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.5.26
+      - name: uri
+        value: "/wp/?p=13"
+  - name: store-http
+    check_name: HTTPCheck
+    host: "172.16.5.23"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school. Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular success.
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: store.dailydoople.bugle
+      - name: uri
+        value: "/"
+  - name: mail-smtp
+    check_name: SMTPCheck
+    host: "172.16.5.24"
+    port: 25
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: Successfully sent email
+      properties:
+      - name: touser
+        value: jaymerjacob@gmail.com
+      - name: subject
+        value: I love band.
+      - name: body
+        value: I don't actually like band.
+  - name: mail-http
+    check_name: HTTPCheck
+    host: "172.16.5.24"
+    port: 80
+    points: 20
+    environments:
+    - matching_content: rainloop
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.100.24
+      - name: uri
+        value: "/"
+  - name: database-ssh
+    check_name: SSHCheck
+    host: "172.16.5.25"
+    port: 22
+    points: 20
+    accounts:
+    - username: pparker
+      password: D@1lyBugl3
+    environments:
+    - matching_content: "^SUCCESS"
+      properties:
+      - name: commands
+        value: ls
+  - name: inject2-1
+    check_name: HTTPSCheck
+    host: "172.16.4.35"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.4.35
+      - name: uri
+        value: "/"
+  - name: inject2-2
+    check_name: HTTPSCheck
+    host: "172.16.5.26"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: The Daily Bugle
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.5.26
+      - name: uri
+        value: "/"
+  - name: inject2-3
+    check_name: HTTPSCheck
+    host: "172.16.5.23"
+    port: 443
+    points: 0
+    environments:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the then-floundering Bugle with monies obtained from assets inherited, and turned the paper into a popular 
+      properties:
+      - name: useragent
+        value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+      - name: vhost
+        value: 172.16.5.23
+      - name: uri
+        value: "/"
+

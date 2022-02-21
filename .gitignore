@@ -1,0 +1,23 @@
+# Common ignores
+*.pyc
+*.swp
+*.swo
+
+# Ignore Apple
+.DS_Store
+
+# Ignore VirtualEnv
+venv/*
+
+# Pyenv
+.python-version
+
+.cache
+.coverage
+htmlcov
+docs/build
+
+scoring_engine.egg-info
+
+# Ignore implemented config file
+engine.conf
