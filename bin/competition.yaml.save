@@ -78,17 +78,17 @@ teams:
   - name: blog-http
     check_name: HTTPCheck
     host: "172.16.1.26"
-    port: 80
+    port: 8080
     points: 20
     environments:
-    - matching_content: The Sinister Six are baddies.
+    - matching_content: The Daily Bugle
       properties:
       - name: useragent
         value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
       - name: vhost
         value: 172.16.1.26
       - name: uri
-        value: "/wordpress"
+        value: "/wp/?p=13"
   - name: store-http
     check_name: HTTPCheck
     host: "172.16.1.23"
@@ -195,11 +195,10 @@ teams:
     port: 443
     points: 0
     environments:
-    - matching_content: The Sinister Six are baddies.
-      properties:
+    - matching_content: began his journalistic career as a reporter for the Bugle while still in high school, Jameson purchased the >      properties:
       - name: useragent
         value: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
       - name: vhost
         value: 172.16.1.26
       - name: uri
-        value: "/wordpress"
+        value: "/"
